@@ -1,0 +1,16 @@
+{
+  "id": "WATER_SOURCE",
+  "displayName": "Water Source",
+  "model": "Props/water_source",
+  "size": {
+    "x": 1,
+    "z": 1
+  },
+  "limit": 10,
+  "cost": 10,
+  "maxHealth": 100,
+  "maxLevel": 3,
+  "type": "WaterSource",
+  "maxPopulation": 5,
+  "isAffectedByDisaster": true
+}

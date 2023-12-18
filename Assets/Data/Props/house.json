@@ -1,0 +1,19 @@
+{
+  "id": "HOUSE",
+  "displayName": "House",
+  "model": "Props/House",
+  "size": {
+    "x": 2,
+    "z": 2
+  },
+  "limit": 10,
+  "cost": 100,
+  "maxHealth": 100,
+  "maxLevel": 3,
+  "type": "Residential",
+  "maxPopulation": 5,
+  "maxJobs": 0,
+  "resourceProduction": null,
+  "resourceConsumption": null,
+  "isAffectedByDisaster": true
+}
