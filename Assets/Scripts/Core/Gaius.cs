@@ -4,6 +4,7 @@ public class Gaius : MonoBehaviour
 {
     private PropsRegistry propsRegistry;
 
+    // Load resources like props, etc.
     void LoadResources()
     {
         string unityPath = Application.dataPath;
@@ -23,6 +24,7 @@ public class Gaius : MonoBehaviour
         this.LoadResources();
     }
 
+    // This is just for testing.
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))

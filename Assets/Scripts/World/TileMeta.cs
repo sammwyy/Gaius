@@ -1,6 +1,21 @@
 using UnityEditor;
 using UnityEngine;
 
+/**
+    TileType is the type of a tile, each type has its own properties.
+    
+    Residential tiles have population and must have water supply, education, and park nearby.
+    Commercial tiles have jobs and must have water supply, education, and park nearby.
+    Industrial tiles have resource production and consumption and must have water supply and road nearby.
+
+    Education tiles have no properties and must have water supply nearby.
+    Fireman tiles have no properties and must have water supply nearby.
+    Hospital tiles have no properties and must have water supply nearby.
+    Police tiles have no properties and must have water supply nearby.
+    Park tiles have no properties and must have water supply nearby.
+    Religious tiles have no properties and must have water supply nearby.
+    Road tiles have no properties and must have water supply nearby.
+*/
 public enum TileType
 {
     Residential,
@@ -30,6 +45,7 @@ public class TileMetaSize
     public int x = -1;
     public int z = -1;
 
+    // Should tile be in chain?
     public bool ShouldChain()
     {
         return this.x > 1 || this.z > 1;

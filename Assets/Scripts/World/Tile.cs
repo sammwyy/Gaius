@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/**
+    Tile is a single tile in the world.
+*/
 public class Tile : MonoBehaviour
 {
     protected TileMeta _meta;

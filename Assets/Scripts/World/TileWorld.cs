@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+    TileWorld is the world where tiles are placed.
+*/
 public class TileWorld : MonoBehaviour
 {
     public GameObject gridPrefab;

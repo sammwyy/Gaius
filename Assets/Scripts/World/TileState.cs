@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+    TileStatus is the status of a tile, which can be empty, building, occupied, or destroyed.
+*/
 public enum TileStatus
 {
     Empty,
@@ -10,6 +13,9 @@ public enum TileStatus
     Invalid
 }
 
+/**
+    TileState is the state of a tile, containing all the stats of a tile based on its meta.
+*/
 public class TileState : ScriptableObject
 {
     // Common stats.

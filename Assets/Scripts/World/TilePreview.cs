@@ -1,10 +1,14 @@
 using UnityEngine;
 
+/**
+    TilePreview is a preview of a tile.
+*/
 public class TilePreview : ScriptableObject
 {
     public GameObject prefab;
     public TileMeta meta;
 
+    // Set preview rendering. This is used when the tile is being previewed.
     public void SetPreviewRendering()
     {
         Renderer renderer = this.prefab.GetComponent<Renderer>();
@@ -12,6 +16,7 @@ public class TilePreview : ScriptableObject
         renderer.material.renderQueue = 3000;
     }
 
+    // Set solid rendering. This is used when the tile is being placed.
     public void SetSolid()
     {
         Renderer renderer = this.prefab.GetComponent<Renderer>();
@@ -19,6 +24,7 @@ public class TilePreview : ScriptableObject
         renderer.material.renderQueue = 2000;
     }
 
+    // Set invalid rendering. This is used when the tile is being placed on an invalid slot.
     public void SetInvalid(bool invalid)
     {
         if (invalid)
@@ -31,11 +37,13 @@ public class TilePreview : ScriptableObject
         }
     }
 
+    // Set preview position.
     public void MoveTo(Vector3 position)
     {
         this.prefab.transform.position = position;
     }
 
+    // Set preview position based on a slot.
     public void MoveTo(TileWorldSlot slot)
     {
         Vector3 slotPos = slot.transform.position;

@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+    TileWorldSlot is a physical slot in the world, inheriting from Tile.
+*/
 public class TileWorldSlot : Tile
 {
     private bool _hovered = false;
