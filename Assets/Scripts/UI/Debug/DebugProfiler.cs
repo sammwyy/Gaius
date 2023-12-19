@@ -132,8 +132,8 @@ public class DebugProfiler : ScriptableObject
             .Replace("{cpuCoreCount}", this.cpuCoreCount.ToString())
 
 
-            .Replace("{gridSelected}", Tile.AsString(this.world.GetSelectedSlot()))
-            .Replace("{gridHovered}", Tile.AsString(this.world.GetHoveredSlot()))
+            .Replace("{gridSelected}", TileWorldSlot.AsString(this.world.GetSelectedSlot()))
+            .Replace("{gridHovered}", TileWorldSlot.AsString(this.world.GetHoveredSlot()))
 
             .Replace("{camera}", this.cameraController.ToString())
             .Replace("{raycastHit}", raycastHitName)

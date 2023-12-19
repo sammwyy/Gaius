@@ -23,6 +23,7 @@ public class TileWorld : MonoBehaviour
     // Get centered selection of slots, based on size of tile.
     public TileWorldSlot[] GetCenteredSelection(TileWorldSlot centered, TileMetaSize size)
     {
+        DebugCallstack.Push();
         List<TileWorldSlot> selection = new();
         Vector3 pos = centered.transform.position;
 
@@ -56,6 +57,7 @@ public class TileWorld : MonoBehaviour
     // Check if can place tile on desired slot, based on size of tile.
     public bool CanPlace(TileWorldSlot centered, TileMetaSize size)
     {
+        DebugCallstack.Push();
         TileWorldSlot[] selection = GetCenteredSelection(centered, size);
 
         if (selection == null)
@@ -95,6 +97,8 @@ public class TileWorld : MonoBehaviour
     // Set preview cursor.
     public void SetPreviewTile(TileMeta tileMeta)
     {
+        DebugCallstack.Push();
+
         if (this.tilePreview != null)
         {
             Destroy(this.tilePreview.prefab);
@@ -115,24 +119,27 @@ public class TileWorld : MonoBehaviour
     // Spawn all grid slots.
     public void Spawn()
     {
+        DebugCallstack.Push();
+
         for (int x = 0; x < this.width; x++)
         {
             for (int z = 0; z < this.height; z++)
             {
-                bool even = (x + z) % 2 == 0;
-
-                GameObject grid = Instantiate(this.gridPrefab, new Vector3(x, 0, z), Quaternion.identity);
-                grid.transform.SetParent(this.transform);
-                this._grid.Add(new Vector2(x, z), grid);
+                GameObject slot = Instantiate(this.gridPrefab, new Vector3(x, 0, z), Quaternion.identity);
+                slot.transform.SetParent(this.transform);
+                slot.name = string.Format("Slot ({0}, {1})", x, z);
+                this._grid.Add(new Vector2(x, z), slot);
 
 #if UNITY_EDITOR
+                bool even = (x + z) % 2 == 0;
+
                 if (even)
                 {
-                    grid.GetComponent<Renderer>().material.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+                    slot.GetComponent<Renderer>().material.color = new Color(0.5f, 0.5f, 0.5f, 1f);
                 }
                 else
                 {
-                    grid.GetComponent<Renderer>().material.color = new Color(0.25f, 0.25f, 0.25f, 1f);
+                    slot.GetComponent<Renderer>().material.color = new Color(0.25f, 0.25f, 0.25f, 1f);
                 }
 #endif
             }
@@ -200,19 +207,25 @@ public class TileWorld : MonoBehaviour
     void HandleSlotInteraction(TileWorldSlot slot)
     {
         // Handle hover.
-        if (this._hoveredSlot != null && this._hoveredSlot != slot)
+        bool isNewHover = this._hoveredSlot != slot;
+
+        if (this._hoveredSlot != null && isNewHover)
         {
             this._hoveredSlot.SetPreview(null);
             this._hoveredSlot.SetHover(false);
         }
 
-        slot.SetHover(true);
-        slot.SetPreview(this.tilePreview);
-        this._hoveredSlot = slot;
-
-        if (this.tilePreview != null)
+        if (isNewHover)
         {
-            this.tilePreview.SetInvalid(!this.CanPlace(slot, this.tilePreview.meta.size));
+            DebugCallstack.Push();
+            slot.SetHover(true);
+            slot.SetPreview(this.tilePreview);
+            this._hoveredSlot = slot;
+
+            if (this.tilePreview != null)
+            {
+                this.tilePreview.SetInvalid(!this.CanPlace(slot, this.tilePreview.meta.size));
+            }
         }
 
         // Handle selection.

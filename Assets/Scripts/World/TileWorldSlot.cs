@@ -4,12 +4,19 @@ using UnityEngine;
 /**
     TileWorldSlot is a physical slot in the world, inheriting from Tile.
 */
-public class TileWorldSlot : Tile
+public class TileWorldSlot : MonoBehaviour
 {
+    // Local state
     private bool _hovered = false;
     private bool _selected = false;
+    private TileMeta _meta;
+    private TileState _state;
+
+    // Chaining
     private TileWorldSlot _chainRoot;
     private List<TileWorldSlot> _chainNodes;
+
+    // Rendering
     private TilePreview _preview;
     private GameObject _child;
     private Color _originalColor;
@@ -95,7 +102,9 @@ public class TileWorldSlot : Tile
 
         this._preview.SetSolid();
         this._preview.MoveTo(this);
-        this.MetaSetTile(this._preview.meta);
+        this._state.Reset();
+        this._state.status = TileStatus.Building;
+        this._meta = this._preview.meta;
         this._child = this._preview.prefab;
         this._hovered = false;
         this.UpdateDebug();
@@ -130,11 +139,35 @@ public class TileWorldSlot : Tile
     }
 
     // Start is called before the first frame update
-    new void Start()
+    void Start()
     {
-        base.Start();
+        _meta = null;
+        _state = ScriptableObject.CreateInstance<TileState>();
+        _state.status = TileStatus.Empty;
         _chainNodes = new List<TileWorldSlot>();
         _originalColor = this.GetComponent<Renderer>().material.color;
+    }
+
+    // Only for debugging.
+    public override string ToString()
+    {
+        Vector3 pos = transform.position;
+        string child = this._meta == null ? "None" : this._meta.id;
+        int level = this._state.level;
+        float health = this._state.health;
+        return $"x={pos.x}, z={pos.z}, child={child}, lv={level}, h={health}";
+    }
+
+    public static string AsString(TileWorldSlot slot)
+    {
+        if (slot == null)
+        {
+            return "<none>";
+        }
+        else
+        {
+            return slot.ToString();
+        }
     }
 
     // Update debug information.

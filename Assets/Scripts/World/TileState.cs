@@ -34,14 +34,14 @@ public class TileState : ScriptableObject
     public int resourceConsumptionRate = -1;
 
     // World properties.
-    public List<Tile> educationNearby = new();
-    public List<Tile> firemanNearby = new();
-    public List<Tile> hospitalNearby = new();
-    public List<Tile> parksNearby = new();
-    public List<Tile> policeNearby = new();
-    public List<Tile> religiousNearby = new();
-    public List<Tile> roadsNearby = new();
-    public List<Tile> waterSupplyNearby = new();
+    public List<TileWorldSlot> educationNearby = new();
+    public List<TileWorldSlot> firemanNearby = new();
+    public List<TileWorldSlot> hospitalNearby = new();
+    public List<TileWorldSlot> parksNearby = new();
+    public List<TileWorldSlot> policeNearby = new();
+    public List<TileWorldSlot> religiousNearby = new();
+    public List<TileWorldSlot> roadsNearby = new();
+    public List<TileWorldSlot> waterSupplyNearby = new();
 
     // Getters: World properties.
     public bool HasEducationNearby()
